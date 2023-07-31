@@ -1,0 +1,22 @@
+{
+  "name": "psnprojectrecord",
+  "version": "1.0.0",
+  "description": "This is a website about algorithm and project by using node.js",
+  "main": "web.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/junstory/PSnProjectRecord.git"
+  },
+  "author": "junstory",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/junstory/PSnProjectRecord/issues"
+  },
+  "homepage": "https://github.com/junstory/PSnProjectRecord#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
