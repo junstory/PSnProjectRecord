@@ -1,0 +1,12 @@
+#!/bin/sh
+ssh cc2-user@NODE.APP.SERVER.IP <<EOF	//CC2-user에 자신이 만든 ec2인스턴스 종류 넣어줌. 나는 ubuntu
+    cd ~/jenkins-tutorial2		//프로젝트를 풀받은 ec2에 들어있는 프로젝트이름
+    git pull origin master
+    curl -o-   https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh    | bash
+    . ~/.nvm/nvm.sh 
+    nvm install 15.9.0	//젠킨스에서 설정한 node 버전
+    npm install
+    npm install -g pm2
+    pm2 restart ecosystem.config.js
+    exit
+EOF
