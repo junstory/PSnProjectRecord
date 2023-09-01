@@ -4,7 +4,7 @@ const express = require('express');
 const template = require(`./lib/template.js`);
 
 const app = express();
-const port = 5000;
+const port = 3000;
 //view engine 설정 : ejs 사용
 app.set('view engine', 'ejs');
 //사용자가 요청을 public에서 찾음.
