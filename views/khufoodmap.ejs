@@ -1,0 +1,31 @@
+<%- include('includes/head.ejs', {'title':'경희대 맛집'}) %>
+<!-- 카카오 API -->
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=37a38f249e027686ecf7c7d8723bffcd"></script>
+<!-- firebase -->
+<script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-database.js"></script>
+</head>
+
+<body>
+  <%- include('includes/navigation.ejs') %>
+  <div class="container">
+    <h1>Hello, MAPS!</h1>
+  </div>
+  <!-- MAP -->
+  <div class="container">
+    <div id="map" style="width:100%;height:450px;"></div>
+
+    <script>
+      var container = document.getElementById('map');
+      var options = {
+        center: new kakao.maps.LatLng(37.247899117265305, 127.07816984215327),
+        level: 3
+      };
+
+      var map = new kakao.maps.Map(container, options);
+    </script>
+    <script src="./js/datashow.js"></script>
+
+  </div>
+
+<%- include('includes/end.ejs') %>

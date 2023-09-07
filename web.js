@@ -3,6 +3,10 @@
 const express = require('express');
 const template = require(`./lib/template.js`);
 
+//firebase연동 처음부터 해야 함.
+//const firebase = require("firebase");
+//const mapJs = require("./lib/datashow.js");
+
 const app = express();
 const port = 3000;
 //view engine 설정 : ejs 사용
@@ -17,6 +21,8 @@ app.get('/', (req,res)=>{
 });
 */
 app.get('/', (req,res)=>{
+  const p = req.params;
+  console.log(p);
   let pathname = req.query.id;
   console.log(pathname);
   if(pathname === 'home'){
@@ -35,13 +41,20 @@ app.get('/form', (req,res)=>{
 });
 
 app.get('/maps', (req,res)=>{
-  res.render('main',{});
+  res.render('khufoodmap',{});
 });
 
 app.post('/public/form.ejs', function(req, res){
   res.render('form', {'name' : req.body.name})
 });
 
+//TEST Space  START
+app.get('/test/:tag', (req,res)=>{
+  const p = req.params;
+  console.log(p)
+})
+
+//TEST Space END
 //없는 주소&요청이면 오류 페이지 연결
 app.use((req,res)=>{
   res.render('404');
