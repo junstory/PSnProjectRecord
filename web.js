@@ -1,64 +1,36 @@
 //pm2로 자동화 코드
 //pm2 start web.js --watch --ignore-watch="public/* .git/* lib/* views/*"
 const express = require('express');
-const template = require(`./lib/template.js`);
+const vhost = require("vhost");
+
+//router 추가
+const mainRouter = require("./route/mainRoute.js");
 
 //firebase연동 처음부터 해야 함.
 //const firebase = require("firebase");
 //const mapJs = require("./lib/datashow.js");
 
 const app = express();
+const plan = express();
+const domain = `junstudy.com`;
 const port = 3000;
+
 //view engine 설정 : ejs 사용
 app.set('view engine', 'ejs');
-//사용자가 요청을 public에서 찾음.
+
+//사용자의 요청, ejs 리소스 모두  public에서 찾음.
 app.use(express.static('public'));
 
-//보여주는 부분
-/*
-app.get('/', (req,res)=>{
-  res.sendFile(__dirname + "/public/index.html");
-});
-*/
-app.get('/', (req,res)=>{
-  const p = req.params;
-  console.log(p);
-  let pathname = req.query.id;
-  console.log(pathname);
-  if(pathname === 'home'){
-    res.render('main',{});
-  }
-  else if(pathname === 'projects'){
-    res.render('projects',{});
-  }
-  else{
-    res.render('main', {});
-  }
-});
+//가상호스트로 서브도메인도 사용되도록 해준 모습
+app.use(vhost(`plan.${domain}`, plan));
+app.use('/', mainRouter);
 
-app.get('/form', (req,res)=>{
-  res.sendFile(__dirname + "/public/form.html");
-});
-
-app.get('/maps', (req,res)=>{
-  res.render('khufoodmap',{});
-});
-
-app.post('/public/form.ejs', function(req, res){
-  res.render('form', {'name' : req.body.name})
-});
-
-//TEST Space  START
-app.get('/test/:tag', (req,res)=>{
-  const p = req.params;
-  console.log(p)
+plan.get("/",(req,res)=>{
+  res.end("Success!");
 })
 
-//TEST Space END
 //없는 주소&요청이면 오류 페이지 연결
-app.use((req,res)=>{
-  res.render('404');
-});
+
 
 // .listen(서버띄울 포트번호, 띄운 후 실행할 코드)
 app.listen(port, function() {
