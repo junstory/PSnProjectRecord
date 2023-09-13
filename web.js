@@ -13,8 +13,7 @@ const planRouter = require("./route/planRoute.js");
 
 const app = express();
 const plan = express();
-const domain =
-      process.NODE_ENV === "production" ? "junstudy.com" : "test.local";
+const domain = "junstudy.com";
 const port = 3000;
 
 //view engine 설정 : ejs 사용
