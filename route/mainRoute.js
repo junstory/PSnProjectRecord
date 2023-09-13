@@ -1,6 +1,9 @@
 const express = require("express");
 const router = express.Router();
 
+//사용자의 요청, ejs 리소스 모두  public에서 찾음.
+router.use(express.static('public'));
+
 router.get('/', (req,res)=>{
   let pathname = req.query.id;
   if(pathname === 'home'){
