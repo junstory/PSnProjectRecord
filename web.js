@@ -36,6 +36,7 @@ plan.use('/', planRouter);
 app.listen(port, function() {
     console.log(`listening on ${port}`);
 });
+
 plan.listen(plan_port, function() {
-    console.log(`listening on ${port}`);
+    console.log(`listening on ${plan_port}`);
 });
