@@ -47,6 +47,6 @@ plan.listen(plan_port, function() {
     console.log(`plan listening on ${plan_port}`);
 });
 
-yebbi.listen(plan_port, function() {
+yebbi.listen(yebbi_port, function() {
     console.log(`yebbi listening on ${plan_port}`);
 });
