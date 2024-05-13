@@ -1,14 +1,12 @@
-const express = require("express");
-const router = express.Router();
+//const express = require("express");
+import express from "express";
+export const yebbiRouter = express.Router({ mergeParams: true });
+yebbiRouter.use(express.static("public"));
 
-router.use(express.static('public'));
-
-router.get("/",(req,res)=>{
-  res.render('yebbi');
-})
-
-router.use((req,res)=>{
-  res.render('404');
+yebbiRouter.get("/", (req, res) => {
+  res.render("yebbi");
 });
 
-module.exports = router;
+yebbiRouter.use((req, res) => {
+  res.render("404");
+});

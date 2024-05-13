@@ -1,16 +1,18 @@
-const express = require("express");
-const router = express.Router();
+//const express = require("express");
+import express from "express";
 const OpenAI = require("openai");
 const dotenv = require("dotenv");
 dotenv.config();
 const gpt = new OpenAI();
-router.use(express.static("public"));
 
-router.get("/", (req, res) => {
+export const planRouter = express.Router({ mergeParams: true });
+planRouter.use(express.static("public"));
+
+planRouter.get("/", (req, res) => {
   res.render("plan");
 });
 
-router.get("/test", async (req, res) => {
+planRouter.get("/test", async (req, res) => {
   console.log(req.query);
   const response = await gpt.images.generate({
     model: "dall-e-3",
@@ -24,8 +26,6 @@ router.get("/test", async (req, res) => {
   res.send(image_url);
 });
 
-router.use((req, res) => {
+planRouter.use((req, res) => {
   res.render("404");
 });
-
-module.exports = router;

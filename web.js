@@ -7,14 +7,15 @@ import express from "express";
 import path from "path";
 
 //router 추가
-const mainRouter = require("./route/mainRoute.js");
-const planRouter = require("./route/planRoute.js");
-const yebbiRouter = require("./route/yebbiRoute.js");
+// const mainRouter = require("./route/mainRoute.js");
+// const planRouter = require("./route/planRoute.js");
+// const yebbiRouter = require("./route/yebbiRoute.js");
 //const testRouter = require("./route/testRoute.js");
-// import {mainRouter} from "./route/mainRoute.js"
-// import {planRouter} from "./route/planRoute"
-// import {yebbiRouter} from "./route/yebbiRoute.js"
+import { mainRouter } from "./route/mainRoute.js";
+import { planRouter } from "./route/planRoute";
+import { yebbiRouter } from "./route/yebbiRoute.js";
 import { testRouter } from "./route/testRoute.js";
+
 //firebase연동 처음부터 해야 함.
 //const firebase = require("firebase");
 //const mapJs = require("./lib/datashow.js");
@@ -42,7 +43,6 @@ yebbi.set("view engine", "ejs");
 app.use("/", mainRouter);
 plan.use("/", planRouter);
 yebbi.use("/", yebbiRouter);
-
 test.use(express.json());
 test.use("/", testRouter);
 

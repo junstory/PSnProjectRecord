@@ -8,5 +8,6 @@ export const testRouter = express.Router({ mergeParams: true });
 testRouter.get("/img", asyncHandler(imgGenerator));
 testRouter.get("/table", asyncHandler(tableGenerator));
 testRouter.get("/", (req, res) => {
+  console.log("TESTRoute");
   res.send("hello!");
 });
