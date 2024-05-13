@@ -28,7 +28,7 @@ const domain = "junstudy.com";
 const port = 3000;
 const plan_port = 5000;
 const yebbi_port = 1203;
-const test_port = 1026;
+const test_port = 8808;
 
 //view engine 설정 : ejs 사용
 app.set("view engine", "ejs");
