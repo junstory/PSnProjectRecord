@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import crypto from "crypto";
 import moment from "moment";
 import axios from "axios";
+import { response } from "express";
 
 dotenv.config();
 
@@ -171,5 +172,25 @@ export const tableGenerator = async (req, res, next) => {
     return res.send(`${default_html}`);
   } catch (err) {
     console.error(err.response.data);
+  }
+};
+
+export const getScore = async (req, res) => {
+  const REQUEST_METHOD = "GET";
+  const URL =
+    "https://link.coupang.com/re/AFFSDP?pageKey=7731271039&itemId=20775910968&vendorItemId=87845766485&traceid=V0-153-725326cdc674530e&clickBeacon=Eos3ywcqprXtmY61ErHNVKd8KtlhLNsRpeiRtDrvfVrlNpLRExRsWtZ61q9vrF4U1RlkE5KWsVHwm8AC4725wxlnUMMq758ohMKdyBab95Wbld-NuPWL4GR-f1rURs0OZtL9BLweu3hoJyHTdGrQNyWBk73Fz3YHJrY8BSNTk5w-651cRCytXUHP1BkH8_lt60KPFVrkOX6W1x_z94xjlbpYLpzR03rdQblWJiUNpdoeFNtAUTcwnnpLgw3MPz0fZCkvGKhVfBhShqnYtj5ktVvnvOgBihEMDugmhiGAq1iw0kr231kbDIEtbz_FsecIumJiXcBrzLcEt5mJSj8SUWp6L_glag9u296sItsy_p2Op-44npxTyHXTPHd6R2dK8-jBuS976OmsHi-tdAPuIpO97cyroCjGzSrmGyytMsoSLrMJ2pM91PnieFp57GjNVXJ7y_7ASCSn9qqCGalV7vgKMdGW1Ijb26g_7fFjuQLPeizIxewS6QJjaeYWpbFVjtkX8oQcjtV_pkSila2i2Wy0kd8Pw_LN5wEV8010XO3jAqmkenu4vpT61Ssd2DD-Ve2cI6kLMYVsLhVLbUlXNWnwbVG6a4RH3mGdjPtH9cqBCJLJfLbTimRstSyJWGLbYgSrfld1BIhuwJVA_hqwSFg_BgY9knqPccjyDIHT4QJmv2iKOQYWCZ2QLkajPuFZOWndvDig_NLVOYBTBhllu-p-0xwV_t_K7dMOR_2I16U9nCjGr-skrI2hIUTccWjWfrzShaJ6vixkMxI6M_d4wt6mQyJKxy0hAITO_MqKOC8QMx-rVO3woDL6JBh_tgm8S1ngdcFJOL6fXFHVg90aaVGS-RsV4JK2To00i8UTmiA9Dk46sETwpJe-X0T4mkzUjFrkTWDuW46C-wcRcJ5812QFP5QFz3tPLP8ic12aLJAsOK-jYADwDkw5flqNkfIGhr0%3D&requestid=20240514115532305107187728&token=31850C%7CMIXED";
+  try {
+    console.log("IN");
+    // const response = await axios.request({
+    //   method: REQUEST_METHOD,
+    //   url: URL,
+    // });
+    const response = await axios.get(
+      "https://www.coupang.com/vp/products/7731271039"
+    );
+
+    console.log(response.data);
+  } catch (error) {
+    console.error(error);
   }
 };
