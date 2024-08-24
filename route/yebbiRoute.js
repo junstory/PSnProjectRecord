@@ -1,10 +1,12 @@
 //const express = require("express");
 import express from "express";
+import path from "path";
 export const yebbiRouter = express.Router({ mergeParams: true });
-yebbiRouter.use(express.static("public"));
+yebbiRouter.use('/',express.static(path.join(__dirname, "public")));
 
 yebbiRouter.get("/", (req, res) => {
-  res.render("yebbi");
+  console.log(path.join(__dirname, '../public/index.html'))
+  res.sendFile(path.join(__dirname, '../public/index.html'));
 });
 
 yebbiRouter.use((req, res) => {

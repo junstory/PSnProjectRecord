@@ -2,3 +2,6 @@ desktop.ini
 .env
 logs
 node_modules
+
+# 사진용
+test
