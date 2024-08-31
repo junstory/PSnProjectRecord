@@ -36,7 +36,10 @@ app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views")); //폴더, 폴더경로 지정
 plan.set("view engine", "ejs");
 plan.set("views", path.join(__dirname, "views")); //폴더, 폴더경로 지정
+
 //yebbi.set("view engine", "ejs");
+//yebbi.set("views", path.join(__dirname, "views")); //폴더, 폴더경로 지정
+yebbi.use(express.static(path.join(__dirname, "public"))); //폴더, 폴더경로 지정
 
 //가상호스트로 서브도메인도 사용되도록 해준 모습
 //app.use(vhost(`plan.${domain}`, plan));

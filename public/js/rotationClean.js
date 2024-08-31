@@ -1,7 +1,10 @@
 var call = 0;
-
+console.log('loaded');
+function test(){
+    console.log('test');
+}
 function new_pdt360DegViewer(id, layer, n, p, t, draggable) {
-    console.log(`${call}-${id}-${draggable ? 'draggable ' : ''}`);
+    console.log(`Integrated ${call}-${id}-${draggable ? 'draggable ' : ''}`);
     call++;
     loaderNone(id);
     
@@ -15,12 +18,12 @@ function new_pdt360DegViewer(id, layer, n, p, t, draggable) {
     mainDiv.innerHTML +=
            '<div class="loader"><div class="three-bounce"><div class="one"></div><div class="two"></div><div class="three"></div></div></div>'
 
-    if (call == 1)
-        for (var h = 1; h <= layer; h++) {
-            for (var k = 1; k <= n; k++) {
-                document.getElementById('dummy').innerHTML += `<img src='${p}${h}_${k}.${t}'>`;
-            }
-        }
+    // if (call == 1)
+    //     for (var h = 1; h <= layer; h++) {
+    //         for (var k = 1; k <= n; k++) {
+    //             document.getElementById('dummy').innerHTML += `<img src='${p}${h}_${k}.${t}'>`;
+    //         }
+    //     }
     var img = document.querySelector(`#${id} .${id}`);
 
     //if (!playable && !autoPlay) {
@@ -30,6 +33,10 @@ function new_pdt360DegViewer(id, layer, n, p, t, draggable) {
         //For Touch Devices
         window.addEventListener('touchstart', function () {
             touchFun();
+        });
+        //스크롤 방지
+        img.addEventListener('wheel', function (e) {
+            e.preventDefault();
         });
 
         function touchFun() {
@@ -58,10 +65,7 @@ function new_pdt360DegViewer(id, layer, n, p, t, draggable) {
                 mouseEvent();
             }
 
-            // if (mouseMove) {
-            //     drag = true;
-            //     mouseEvent();
-            // }
+            
             function mouseEvent() {
                 img.addEventListener('mousemove', function (e) {
                     (drag) ? logic(this, e) : null;
@@ -70,22 +74,7 @@ function new_pdt360DegViewer(id, layer, n, p, t, draggable) {
                     move = [];
                 });
             }
-            // if (scroll) {
-            //     img.addEventListener('wheel', function (e) {
-            //         e.preventDefault();
-            //         (e.wheelDelta / 120 > 0) ? nxt(this) : prev(this);
-            //     });
-            // }
-            // if (keys) {
-            //     img.setAttribute('tabindex', '0');
-            //     img.onkeydown = function (e) {
-            //         e.preventDefault();
-            //         if (e.keyCode == 37 || e.keyCode == 38)
-            //             prev(img);
-            //         else if (e.keyCode == 39 || e.keyCode == 40)
-            //             nxt(img);
-            //     };
-            // }
+           
         }
         function logic(el, e) {
             j++;
@@ -116,17 +105,26 @@ function new_pdt360DegViewer(id, layer, n, p, t, draggable) {
                     prev(el);
             }
             */
-           let deltaX = move[l-1][0] - move[l-5][0];
-           let deltaY = move[l-1][1] - move[l-5][1];
+        //    let deltaX = move[l-1][0] - move[l-5][0];
+        //    let deltaY = move[l-1][1] - move[l-5][1];
+           
+        let deltaX;
+        let deltaY;
+        if(move.length>1){
+            deltaX = move[l-1][0] - move[l-2][0];
+            deltaY = move[l-1][1] - move[l-2][1];
+       }
+
+           //delta 값을 조정해서 움직임 속도 조절 //기본(-5)
            if (thresh) {
-                if (deltaX > 15)
+                if (deltaX > 0)
                     prev_y(el);
-                else if (deltaX < -15)
+                else if (deltaX < 0)
                     nxt_y(el);
 
-                if (deltaY > 10)
+                if (deltaY > 0)
                     nxt(el);
-                else if (deltaY < -10)
+                else if (deltaY < 0)
                     prev(el);
             }
             
@@ -155,7 +153,7 @@ function new_pdt360DegViewer(id, layer, n, p, t, draggable) {
     //}
 
     function prev(e) {
-        if (i < 1) {
+        if (i <= 1) {
             i = n;
             e.src = `${p}${dy}_${--i}.${t}`;
             nxt(e);
@@ -164,7 +162,7 @@ function new_pdt360DegViewer(id, layer, n, p, t, draggable) {
         console.log("X--");
     }
     function nxt(e) {
-        if (i > n) {
+        if (i >= n) {
             i = 1;
             e.src = `${p}${dy}_${++i}.${t}`;
             prev(e);
@@ -175,7 +173,7 @@ function new_pdt360DegViewer(id, layer, n, p, t, draggable) {
 
     //y변화용
     function prev_y(e) {
-        if (dy < 1) {
+        if (dy <= 1) {
             dy = layer;
             e.src = `${p}${--dy}_${i}.${t}`;
             nxt(e);
@@ -184,7 +182,7 @@ function new_pdt360DegViewer(id, layer, n, p, t, draggable) {
         console.log("Y--");
     }
     function nxt_y(e) {
-        if (dy > layer) {
+        if (dy >= layer) {
             dy = 1;
             e.src = `${p}${++dy}_${i}.${t}`;
             prev(e);

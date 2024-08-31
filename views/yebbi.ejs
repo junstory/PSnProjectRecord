@@ -4,6 +4,7 @@
 
 <body>
   <%- include('includes/navigation.ejs') %>
+  TEST
   <div class="container">
     <h1></h1>
     <p></p>
@@ -19,6 +20,17 @@
     <li></li>
     </ul>
   </div>
+
+  <h1>드래그 테스트</h1>
+  <div id="try2">try2</div>
+  <div id="try3"></div>
+  <div id="dummy" class="loader"></div>
+  <script src="js/rotationClean.js">
+    let try2 = 'try2';
+    //2024 07 NEW 도전
+    test();
+    new_pdt360DegViewer(try2, 10, 12, `./img/${try2}/`, 'jpg', true)
+</script>
 
 
 <%- include('includes/end.ejs') %>
