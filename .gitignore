@@ -2,6 +2,8 @@ desktop.ini
 .env
 logs
 node_modules
+package-lock.json
 
 # 사진용
 test
+
